@@ -1,8 +1,9 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Duration } from 'luxon';
+import { DateTime, Duration } from 'luxon';
 import { Column, Entity, OneToMany } from 'typeorm';
 import { Booking } from '../../booking/model/booking.model';
 import { BaseModel } from '../../core/model/base.model';
+import { DateTimeTransformer } from '../../core/transformer/date-time.transformer';
 import { DurationTransformer } from '../../core/transformer/duration.transformer';
 
 @Entity()
@@ -15,6 +16,18 @@ export class Place extends BaseModel {
   @Column('text')
   @Field()
   name: string;
+
+  @Column('timestamp', {
+    transformer: new DateTimeTransformer(),
+  })
+  @Field()
+  openingTime: DateTime;
+
+  @Column('timestamp', {
+    transformer: new DateTimeTransformer(),
+  })
+  @Field()
+  closingTime: DateTime;
 
   @Column('integer')
   @Field()

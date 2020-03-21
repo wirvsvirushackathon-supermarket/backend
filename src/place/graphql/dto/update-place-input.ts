@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { Duration } from 'luxon';
+import { DateTime, Duration } from 'luxon';
 
 @InputType()
 export class UpdatePlaceInput {
@@ -8,6 +8,12 @@ export class UpdatePlaceInput {
 
   @Field()
   name: string;
+
+  @Field()
+  openingTime: DateTime;
+
+  @Field()
+  closingTime: DateTime;
 
   @Field()
   slotCount: number;
