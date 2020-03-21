@@ -1,6 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Duration } from 'luxon';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
+import { Booking } from '../../booking/model/booking.model';
 import { BaseModel } from '../../core/model/base.model';
 import { DurationTransformer } from '../../core/transformer/duration.transformer';
 
@@ -19,9 +20,17 @@ export class Place extends BaseModel {
   @Field()
   slotCount: number;
 
-  @Column('interval', {
+  @Column('text', {
     transformer: new DurationTransformer(),
   })
   @Field()
   slotSize: Duration;
+
+  @OneToMany(
+    () => Booking,
+    (booking: Booking) => booking.place,
+    { lazy: true },
+  )
+  @Field(type => [Booking])
+  public bookings: Booking[];
 }
