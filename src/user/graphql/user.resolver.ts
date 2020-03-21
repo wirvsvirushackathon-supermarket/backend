@@ -1,6 +1,9 @@
 import { NotFoundException } from '@nestjs/common';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { User } from '../model/user.model';
+import { UserService } from '../service/user.service';
+import { CreateUserInput } from './dto/create-user-input';
+import { UpdateUserInput } from './dto/update-user-input';
 
 @Resolver(of => User)
 export class UserResolver {
@@ -17,15 +20,15 @@ export class UserResolver {
 
   @Mutation(returns => User)
   async createUser(
-    @Args('createBookingInput') args: CreateUserInput,
-  ): Promise<Booking> {
-    return await this.bookingService.create(args);
+    @Args('createUserInput') args: CreateUserInput,
+  ): Promise<User> {
+    return await this.userService.create(args);
   }
 
-  @Mutation(returns => Booking)
-  async updateBooking(
-    @Args('updateBookingInput') args: UpdateBookingInput,
-  ): Promise<Booking> {
-    return await this.bookingService.update(args);
+  @Mutation(returns => User)
+  async updateUser(
+    @Args('updateUserInput') args: UpdateUserInput,
+  ): Promise<User> {
+    return await this.userService.update(args);
   }
 }

@@ -12,7 +12,7 @@ import { User } from '../../user/model/user.model';
 export class Booking extends BaseModel {
   @ManyToOne(
     () => User,
-    (user: User) => user.bookins,
+    (user: User) => user.bookings,
     { nullable: false, lazy: true },
   )
   @Field(type => User)
