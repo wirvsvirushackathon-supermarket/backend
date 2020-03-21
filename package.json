@@ -12,7 +12,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "DATABASE_HOST=$DATABASE_HOST DATABASE_PASSWORD=$DATABASE_PASSWORD node dist/main",
+    "start:prod": "DATABASE_HOST=$DATABASE_HOST DATABASE_DATABASE=$DATABASE_DATABASE DATABASE_USER=$DATABASE_USER DATABASE_PASSWORD=$DATABASE_PASSWORD node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
