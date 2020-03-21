@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  pg:
+    image: postgres:latest
+    container_name: postgres-supermarket
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./pg:/docker-entrypoint-initdb.d/
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_USER=root
+      - POSTGRES_DB=supermarket
+  backend:
+    image: node:13.10.1
+    volumes:
+      - ./:/backend
+    command: bash -c "cd /backend && npm run start:dev"
+    depends_on:
+      - pg
+    ports:
+      - '3000:3000'

@@ -1,0 +1,6 @@
+FROM node:13.10.1
+
+WORKDIR /app
+COPY ./dist ./
+
+CMD ["DATABASE_HOST=$DATABASE_HOST", "DATABASE_PASSWORD=$DATABASE_PASSWORD", "node", "dist/main"]
