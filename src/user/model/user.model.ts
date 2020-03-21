@@ -3,7 +3,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 import { Booking } from '../../booking/model/booking.model';
 import { BaseModel } from '../../core/model/base.model';
 
-@Entity()
+@Entity({ name: 'app_user' })
 @ObjectType()
 export class User extends BaseModel {
   @Column('text')
