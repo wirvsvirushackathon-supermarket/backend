@@ -1,0 +1,1 @@
+SET intervalStyle = iso_8601;

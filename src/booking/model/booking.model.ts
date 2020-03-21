@@ -15,7 +15,7 @@ export class Booking extends BaseModel {
   @Field()
   start: DateTime;
 
-  @Column('text', {
+  @Column('interval', {
     transformer: new DurationTransformer(),
   })
   @Field()

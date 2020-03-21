@@ -20,7 +20,7 @@ export class Place extends BaseModel {
   @Field()
   slotCount: number;
 
-  @Column('text', {
+  @Column('interval', {
     transformer: new DurationTransformer(),
   })
   @Field()

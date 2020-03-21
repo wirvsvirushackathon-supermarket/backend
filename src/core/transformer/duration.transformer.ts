@@ -2,8 +2,8 @@ import { Duration } from 'luxon';
 import { ValueTransformer } from 'typeorm';
 
 export class DurationTransformer implements ValueTransformer {
-  public from(value: string): Duration {
-    return Duration.fromISO(value);
+  public from(value: object): Duration {
+    return Duration.fromObject(value);
   }
 
   public to(value: Duration): string {

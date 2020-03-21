@@ -10,7 +10,6 @@ pids
 
 # Build data
 dist
-pg
 schema.gql
 
 # OS
