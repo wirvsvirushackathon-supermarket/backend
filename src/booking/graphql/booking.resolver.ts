@@ -1,5 +1,7 @@
 import { NotFoundException } from '@nestjs/common';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { PlaceService } from '../../place/service/place.service';
+import { UserService } from '../../user/service/user.service';
 import { Booking } from '../model/booking.model';
 import { BookingService } from '../service/booking.service';
 import { CreateBookingInput } from './dto/create-booking-input';
@@ -7,7 +9,11 @@ import { UpdateBookingInput } from './dto/update-booking-input';
 
 @Resolver(of => Booking)
 export class BookingResolver {
-  constructor(private readonly bookingService: BookingService) {}
+  constructor(
+    private readonly bookingService: BookingService,
+    private readonly userService: UserService,
+    private readonly placeService: PlaceService,
+  ) {}
 
   @Query(returns => [Booking])
   bookings(): Promise<Booking[]> {
@@ -27,7 +33,9 @@ export class BookingResolver {
   async createBooking(
     @Args('createBookingInput') args: CreateBookingInput,
   ): Promise<Booking> {
-    return await this.bookingService.create(args);
+    const user = await this.userService.findById(args.userId);
+    const place = await this.placeService.findById(args.placeId);
+    return await this.bookingService.create({ ...args, user, place });
   }
 
   @Mutation(returns => Booking)

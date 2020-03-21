@@ -8,4 +8,10 @@ export class CreateBookingInput {
 
   @Field()
   duration: Duration;
+
+  @Field()
+  placeId: number;
+
+  @Field()
+  userId: number;
 }
