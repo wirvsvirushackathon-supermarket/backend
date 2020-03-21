@@ -7,7 +7,7 @@ export class DateTimeScalar implements CustomScalar<string, DateTime> {
   description = 'Date custom scalar type';
 
   parseValue(value: string): DateTime {
-    return DateTime.fromISO(value); // value from the client
+    return DateTime.fromISO(value, { setZone: true }); // value from the client
   }
 
   serialize(value: DateTime): string {
@@ -16,7 +16,7 @@ export class DateTimeScalar implements CustomScalar<string, DateTime> {
 
   parseLiteral(ast: any): DateTime {
     if (ast.kind === Kind.STRING) {
-      return DateTime.fromISO(ast.value);
+      return DateTime.fromISO(ast.value, { setZone: true });
     }
     return null;
   }

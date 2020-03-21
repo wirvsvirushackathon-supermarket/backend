@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Booking } from '../model/booking.model';
+import { generateCode } from './code.function';
 
 @Injectable()
 export class BookingService {
@@ -11,6 +12,7 @@ export class BookingService {
   ) {}
 
   create(booking: Partial<Booking>) {
+    booking.code = generateCode();
     return this.bookingRepository.save(this.bookingRepository.create(booking));
   }
 

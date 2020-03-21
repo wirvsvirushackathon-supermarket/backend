@@ -7,6 +7,6 @@ export class DateTimeTransformer implements ValueTransformer {
   }
 
   public to(value: DateTime): string {
-    return value.toSQL();
+    return value.toUTC().toSQL();
   }
 }
