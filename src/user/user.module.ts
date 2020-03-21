@@ -9,4 +9,4 @@ import { UserService } from './service/user.service';
   providers: [UserService, UserResolver],
   exports: [TypeOrmModule],
 })
-export class BookingModule {}
+export class UserModule {}

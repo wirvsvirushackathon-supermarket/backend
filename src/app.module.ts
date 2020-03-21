@@ -11,6 +11,8 @@ import { DateTimeScalar } from './core/scalar/date-time.scalar';
 import { DurationScalar } from './core/scalar/duration.scalar';
 import { Place } from './place/model/place.model';
 import { PlaceModule } from './place/place.module';
+import { User } from './user/model/user.model';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -27,7 +29,7 @@ import { PlaceModule } from './place/place.module';
         username: configService.get<string>('database.user'),
         password: configService.get<string>('database.password'),
         database: configService.get<string>('database.database'),
-        entities: [Place, Booking],
+        entities: [Place, Booking, User],
         synchronize: true,
       }),
     }),
@@ -37,6 +39,7 @@ import { PlaceModule } from './place/place.module';
     }),
     PlaceModule,
     BookingModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService, DateTimeScalar, DurationScalar],
