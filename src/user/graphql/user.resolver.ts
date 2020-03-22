@@ -23,9 +23,9 @@ export class UserResolver {
   async createUser(
     @Args('createUserInput') args: CreateUserInput,
   ): Promise<User> {
-    const newUser: Promise<User> = args;
-    (await newUser).uuid = generateCode();
-    return await this.userService.create(args);
+    const uuid = generateCode();
+    const newUser: User = { ...args, uuid };
+    return await this.userService.create(newUser);
   }
 
   @Mutation(returns => User)
