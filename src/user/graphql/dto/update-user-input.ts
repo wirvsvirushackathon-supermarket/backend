@@ -9,5 +9,5 @@ export class UpdateUserInput {
   surname: string;
 
   @Field()
-  lastname: string;
+  name: string;
 }

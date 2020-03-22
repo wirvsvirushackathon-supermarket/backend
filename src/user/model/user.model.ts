@@ -16,7 +16,7 @@ export class User extends BaseModel {
 
   @Column('text')
   @Field()
-  lastname: string;
+  name: string;
 
   @OneToMany(
     () => Booking,

@@ -54,7 +54,7 @@ export class BookingResolver {
     slotSize: Duration,
     @Args({ name: 'startTime', type: () => DateTime })
     startTime: DateTime,
-  ) {
+  ): Promise<number> {
     return await this.bookingService.findAvailableSlots(
       placeId,
       slotSize,

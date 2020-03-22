@@ -1,5 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { generateCode } from '../../booking/service/code.function';
 import { User } from '../model/user.model';
 import { UserService } from '../service/user.service';
 import { CreateUserInput } from './dto/create-user-input';
@@ -22,6 +23,8 @@ export class UserResolver {
   async createUser(
     @Args('createUserInput') args: CreateUserInput,
   ): Promise<User> {
+    const newUser: Promise<User> = args;
+    (await newUser).uuid = generateCode();
     return await this.userService.create(args);
   }
 
