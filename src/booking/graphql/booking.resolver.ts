@@ -1,5 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { DateTime, Duration } from 'luxon';
 import { PlaceService } from '../../place/service/place.service';
 import { UserService } from '../../user/service/user.service';
 import { Booking } from '../model/booking.model';
@@ -43,5 +44,21 @@ export class BookingResolver {
     @Args('updateBookingInput') args: UpdateBookingInput,
   ): Promise<Booking> {
     return await this.bookingService.update(args);
+  }
+
+  @Query(returns => Int)
+  async availableSlots(
+    @Args({ name: 'placeId', type: () => Int })
+    placeId: number,
+    @Args({ name: 'slotSize', type: () => Duration })
+    slotSize: Duration,
+    @Args({ name: 'startTime', type: () => DateTime })
+    startTime: DateTime,
+  ) {
+    return await this.bookingService.findAvailableSlots(
+      placeId,
+      slotSize,
+      startTime,
+    );
   }
 }
