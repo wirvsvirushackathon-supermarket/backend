@@ -1,4 +1,7 @@
-import { NotFoundException } from '@nestjs/common';
+import {
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Place } from '../model/place.model';
 import { PlaceService } from '../service/place.service';
@@ -15,8 +18,23 @@ export class PlaceResolver {
   }
 
   @Query(returns => Place)
-  async place(@Args({ name: 'id', type: () => Int }) id: number) {
-    const place = await this.placeService.findById(id);
+  async place(
+    @Args({ name: 'id', type: () => Int }) id: number,
+    @Args({ name: 'placeId', type: () => Int }) placeId: number,
+  ) {
+    let place;
+    if (id) {
+      place = await this.placeService.findById(id);
+      if (place && place.placeId !== place) {
+        throw new InternalServerErrorException(
+          id,
+          `Requested id:${id} does not match requested placeId:${placeId}`,
+        );
+      }
+    } else if (placeId) {
+      place = await this.placeService.findByPlaceId(id);
+    }
+
     if (!place) {
       throw new NotFoundException(id);
     }

@@ -9,7 +9,7 @@ import { DurationTransformer } from '../../core/transformer/duration.transformer
 @Entity()
 @ObjectType()
 export class Place extends BaseModel {
-  @Column('text')
+  @Column('text', { unique: true })
   @Field()
   placeId: string;
 

@@ -25,4 +25,8 @@ export class PlaceService {
   findById(id: number): Promise<Place> {
     return this.placeRepository.findOne(id);
   }
+
+  findByPlaceId(placeId: number): Promise<Place> {
+    return this.placeRepository.findOne({ where: { placeId } });
+  }
 }
