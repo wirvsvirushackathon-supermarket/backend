@@ -24,7 +24,7 @@ export class UserResolver {
     @Args('createUserInput') args: CreateUserInput,
   ): Promise<User> {
     const uuid = generateCode();
-    const newUser: User = { ...args, uuid };
+    const newUser: User = { ...args, uuid } as User;
     return await this.userService.create(newUser);
   }
 
